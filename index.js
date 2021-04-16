@@ -1,6 +1,6 @@
 const request = new reqsponse();
 
-// request.get('https://jsonplaceholder.typicode.com/posts/1', function(
+// request.get('https://jsonplaceholder.typicode.com/postss/1', function(
 //   error,
 //   post
 // ) {
@@ -15,18 +15,19 @@ data = {
   title: 'This is the title',
   body: 'Body of the post'
 };
-// request.post('https://jsonplaceholder.typicode.com/postst', data, function(
+
+// request.post('https://jsonplaceholder.typicode.com/posts', data, function(
 //   error,
 //   post
 // ) {
-//   if (!error) {
+//   if (post) {
 //     console.log(post);
 //   } else {
 //     console.log(error);
 //   }
 // });
 
-// request.put('https://jsonplaceholder.typicode.com/postss/1', data, function(
+// request.put('https://jsonplaceholder.typicode.com/posts/13', data, function(
 //   error,
 //   post
 // ) {

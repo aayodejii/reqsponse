@@ -24,7 +24,11 @@ reqsponse.prototype.post = function(url, data, callback) {
 
   let self = this;
   this.http.onload = function() {
-    callback(null, self.http.responseText);
+    if (self.http.status === 201) {
+      callback(null, self.http.responseText);
+    } else {
+      callback('Error: ' + self.http.status);
+    }
   };
   this.http.send(JSON.stringify(data));
 };
@@ -36,7 +40,11 @@ reqsponse.prototype.put = function(url, data, callback) {
 
   let self = this;
   this.http.onload = function() {
-    callback(null, self.http.responseText);
+    if (self.http.status === 200) {
+      callback(null, self.http.responseText);
+    } else {
+      callback('Error: ' + self.http.status);
+    }
   };
 
   this.http.send(JSON.stringify(data));
@@ -50,7 +58,7 @@ reqsponse.prototype.delete = function(url, callback) {
     if (self.http.status === 200) {
       callback(null, 'Post deleted');
     } else {
-      callback('Error: ' + self.responseText);
+      callback('Error: ' + self.http.status);
     }
   };
   this.http.send();
