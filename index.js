@@ -1,15 +1,22 @@
+/**
+ * This is a test driver for the library
+ * You can edit this file to get the understanding of how the library works
+ *
+ *
+ * **/
+
 const request = new reqsponse();
 
-// request.get('https://jsonplaceholder.typicode.com/postss/1', function(
-//   error,
-//   post
-// ) {
-//   if (!error) {
-//     console.log(post);
-//   } else {
-//     console.log(error);
-//   }
-// });
+request.get('https://jsonplaceholder.typicode.com/posts', function(
+  error,
+  post
+) {
+  if (!error) {
+    console.log(post);
+  } else {
+    console.log(error);
+  }
+});
 
 data = {
   title: 'This is the title',
@@ -38,13 +45,13 @@ data = {
 //   }
 // });
 
-request.delete('https://jsonplaceholder.typicode.com/posts/1', function(
-  error,
-  response
-) {
-  if (!error) {
-    console.log(response);
-  } else {
-    console.log(error);
-  }
-});
+// request.delete('https://jsonplaceholder.typicode.com/posts/1', function(
+//   error,
+//   response
+// ) {
+//   if (!error) {
+//     console.log(response);
+//   } else {
+//     console.log(error);
+//   }
+// });
