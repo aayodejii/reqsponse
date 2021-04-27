@@ -1,65 +1,63 @@
-function reqsponse() {
-  this.http = new XMLHttpRequest();
+/**
+ * Reqsponse Library
+ * Making HTTP requests easier
+ * This library can be use to make requests to APIs very fast
+ * It reduces boilerplate code
+ *
+ * @version 2.0.0
+ * @author Akenroye A.
+ * @license MIT
+ *
+ * **/
+
+class Reqsponse {
+  get(url) {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(response => response.text())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    });
+  }
+
+  post(url, data) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    });
+  }
+
+  put(url, data) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    });
+  }
+
+  delete(url) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'DELETE',
+
+        headers: { 'Content-type': 'application/json' }
+      })
+        .then(response => response.json())
+        .then(resolve('Resource Deleted!'))
+        .catch(error => reject(error));
+    });
+  }
 }
-
-//GET method- for making GET request
-reqsponse.prototype.get = function(url, callback) {
-  this.http.open('GET', url, true);
-
-  let self = this;
-  this.http.onload = function() {
-    if (self.http.status === 200) {
-      callback(null, self.http.responseText);
-    } else {
-      callback('Error: ' + self.http.status);
-    }
-  };
-  this.http.send();
-};
-
-//POST method - for making POST request
-reqsponse.prototype.post = function(url, data, callback) {
-  this.http.open('POST', url, true);
-  this.http.setRequestHeader('content-type', 'application/json');
-
-  let self = this;
-  this.http.onload = function() {
-    if (self.http.status === 201) {
-      callback(null, self.http.responseText);
-    } else {
-      callback('Error: ' + self.http.status);
-    }
-  };
-  this.http.send(JSON.stringify(data));
-};
-
-//PUT method - for making PUT request
-reqsponse.prototype.put = function(url, data, callback) {
-  this.http.open('PUT', url, data);
-  this.http.setRequestHeader('content-type', 'application/json');
-
-  let self = this;
-  this.http.onload = function() {
-    if (self.http.status === 200) {
-      callback(null, self.http.responseText);
-    } else {
-      callback('Error: ' + self.http.status);
-    }
-  };
-
-  this.http.send(JSON.stringify(data));
-};
-
-//DELETE method - for making delete request
-reqsponse.prototype.delete = function(url, callback) {
-  this.http.open('DELETE', url, callback);
-  let self = this;
-  this.http.onload = function() {
-    if (self.http.status === 200) {
-      callback(null, 'Post deleted');
-    } else {
-      callback('Error: ' + self.http.status);
-    }
-  };
-  this.http.send();
-};
